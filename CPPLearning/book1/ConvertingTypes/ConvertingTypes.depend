@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1383031742 source:c:\users\alice\documents\github\cpplearning\convertingtypes\convertingtypes.cpp
+	<iostream>
+	<sstream>
+

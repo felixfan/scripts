@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1383039338 source:c:\users\alice\documents\github\cpplearning\seedingrandomnumbergenerator\main.cpp
+	<iostream>
+	<ctime>
+	<cstdlib>
+

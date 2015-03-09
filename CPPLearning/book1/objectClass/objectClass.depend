@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1382682236 source:c:\users\alice\documents\github\cpplearning\objectclass\main.cpp
+	<iostream>
+	"Pen.h"
+	"Oven.h"
+
+1382679985 c:\users\alice\documents\github\cpplearning\objectclass\pen.h
+
+1382679943 source:c:\users\alice\documents\github\cpplearning\objectclass\pen.cpp
+	<iostream>
+	"Pen.h"
+
+1382680537 source:c:\users\alice\documents\github\cpplearning\objectclass\oven.cpp
+	<iostream>
+	"Oven.h"
+
+1382680407 c:\users\alice\documents\github\cpplearning\objectclass\oven.h
+

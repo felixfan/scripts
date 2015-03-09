@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1383032439 source:c:\users\alice\documents\github\cpplearning\readingfromconsole\convertingtypes.cpp
+	<iostream>
+	<sstream>
+
+1383035037 source:c:\users\alice\documents\github\cpplearning\readingfromconsole\main.cpp
+	<iostream>
+	<sstream>
+	<conio.h>
+	"ConvertingTypes.h"
+
+1383032436 c:\users\alice\documents\github\cpplearning\readingfromconsole\convertingtypes.h
+

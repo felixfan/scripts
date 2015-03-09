@@ -1,0 +1,6 @@
+#ifndef CHARSTRING_H_INCLUDED
+#define CHARSTRING_H_INCLUDED
+
+void CharString();
+
+#endif // CHARSTRING_H_INCLUDED

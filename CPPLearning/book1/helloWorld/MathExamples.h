@@ -1,0 +1,6 @@
+#ifndef MATHEXAMPLES_H_INCLUDED
+#define MATHEXAMPLES_H_INCLUDED
+
+void MathExamples();
+
+#endif // MATHEXAMPLES_H_INCLUDED

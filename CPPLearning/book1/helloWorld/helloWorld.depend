@@ -1,0 +1,71 @@
+# depslib dependency file v1.0
+1382597242 source:c:\users\alice\documents\github\cpplearning\helloworld\main.cpp
+	<iostream>
+	"GlobalVar.h"
+	"AddOne.h"
+	"BigDog.h"
+	"PrintName.h"
+	"Loops.h"
+	"MathExamples.h"
+	"CharString.h"
+	"IfElse.h"
+	"PointerVariable.h"
+
+1382594876 source:c:\users\alice\documents\github\cpplearning\helloworld\bigdog.cpp
+	<iostream>
+	"GlobalVar.h"
+
+1382586983 source:c:\users\alice\documents\github\cpplearning\helloworld\printname.cpp
+	<iostream>
+
+1382587107 source:c:\users\alice\documents\github\cpplearning\helloworld\addone.cpp
+	<iostream>
+
+1382589654 source:c:\users\alice\documents\github\cpplearning\helloworld\loops.cpp
+	<iostream>
+
+1382591056 source:c:\users\alice\documents\github\cpplearning\helloworld\mathexamples.cpp
+	<iostream>
+	<math.h>
+	"AddOne.h"
+
+1382590563 source:c:\users\alice\documents\github\cpplearning\helloworld\charstring.cpp
+	<iostream>
+
+1382590729 source:c:\users\alice\documents\github\cpplearning\helloworld\ifelse.cpp
+	<iostream>
+
+1382589136 c:\users\alice\documents\github\cpplearning\helloworld\addone.h
+
+1382594568 source:c:\users\alice\documents\github\cpplearning\helloworld\globalvar.cpp
+
+1382594485 c:\users\alice\documents\github\cpplearning\helloworld\globalvar.h
+
+1382589238 c:\users\alice\documents\github\cpplearning\helloworld\bigdog.h
+
+1382589725 c:\users\alice\documents\github\cpplearning\helloworld\printname.h
+
+1382589569 c:\users\alice\documents\github\cpplearning\helloworld\loops.h
+
+1382590050 c:\users\alice\documents\github\cpplearning\helloworld\mathexamples.h
+
+1382590422 c:\users\alice\documents\github\cpplearning\helloworld\charstring.h
+
+1382590772 c:\users\alice\documents\github\cpplearning\helloworld\ifelse.h
+
+1382597187 c:\users\alice\documents\github\cpplearning\helloworld\pointervariable.h
+
+1382600294 source:c:\users\alice\documents\github\cpplearning\helloworld\changesaregood.cpp
+	<iostream>
+
+1382600762 source:c:\users\alice\documents\github\cpplearning\helloworld\paranoid.cpp
+	<iostream>
+
+1382601700 source:c:\users\alice\documents\github\cpplearning\helloworld\getsecretcode.cpp
+	<iostream>
+	<sstream>
+	<cstdlib>
+
+1382603454 source:c:\users\alice\documents\github\cpplearning\helloworld\messmeup.cpp
+	<iostream>
+
