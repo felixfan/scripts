@@ -1,6 +1,8 @@
 #include <iostream>
 using namespace std;
-
+/*
+计算正整数 m 到 n（包括m 和 n ）之间的所有奇数的和
+*/
 int main() {
 	int m, n;
 	cin >> m >> n;

@@ -3,6 +3,17 @@
 #include <cstdio>
 using namespace std;
 
+/*
+描述
+给定一组点(x,y)，求距离最远的两个点之间的距离。
+
+输入
+第一行是点数n（n大于等于2）
+接着每一行代表一个点，由两个浮点数x y组成。
+
+输出
+输出一行是最远两点之间的距离。
+*/
 int main() {
 	int n;
 	cin >> n;

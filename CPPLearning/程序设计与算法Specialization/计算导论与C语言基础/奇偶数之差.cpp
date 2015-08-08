@@ -1,6 +1,9 @@
 #include <iostream>
 using namespace std;
-
+/*
+输入6个正整数，且这6个正整数中至少存在一个奇数和一个偶数。
+设这6个正整数中最大的奇数为a，最小的偶数为b，求出|a-b|的值
+*/
 int main() {
 	int n=6;
 	int maxOdd=0, minEven=0;
