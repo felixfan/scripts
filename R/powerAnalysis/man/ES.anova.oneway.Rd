@@ -1,0 +1,25 @@
+\name{ES.anova.oneway}
+\alias{ES.anova.oneway}
+\title{Calculating effect size (Cohen's f) of one-way anova for means with equal observations in each group}
+\usage{
+  ES.anova.oneway(data = NULL, sst = NULL, ssb = NULL)
+}
+\arguments{
+  \item{data}{a matrix or data frame}
+
+  \item{sst}{total sum of squares}
+
+  \item{ssb}{sum of squares between groups}
+}
+\description{
+  Calculating effect size (Cohen's f) of one-way anova for
+  means with equal observations in each group
+}
+\examples{
+set.seed(9);x=rnorm(50);y=rnorm(50)
+z=rnorm(50);d=data.frame(x,y,z)
+ES.anova.oneway(data=d)
+
+ES.anova.oneway(sst=50,ssb=1)
+}
+

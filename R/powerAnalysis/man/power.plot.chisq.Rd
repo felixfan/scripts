@@ -1,0 +1,59 @@
+\name{power.plot.chisq}
+\alias{power.plot.chisq}
+\title{Power analysis plot of chi-squared test}
+\usage{
+  power.plot.chisq(es = NULL, power = NULL, df = NULL,
+    sig.level = NULL, allele = FALSE, xlab = NULL,
+    ylab = NULL, main = NULL, grid = FALSE,
+    type = c("np", "ne"))
+}
+\arguments{
+  \item{es}{effect size.}
+
+  \item{power}{power of study}
+
+  \item{df}{degree of freedom}
+
+  \item{sig.level}{significance level}
+
+  \item{allele}{in genetic association study, whether test
+  allele or genotype}
+
+  \item{xlab}{a title for the x axis}
+
+  \item{ylab}{a title for the y axis}
+
+  \item{main}{an overall title for the plot}
+
+  \item{grid}{add grid lines or not}
+
+  \item{type}{"np": plot sample size vs. power; "ne": plot
+  effevct size vs. sample size}
+}
+\description{
+  Power analysis plot of chi-squared test
+}
+\examples{
+## 'ne' type
+### multiple effect size and multiple power
+es=seq(from=0.1,to=0.5,by=0.1);
+power=seq(from=0.7,to=0.9,by=0.1);
+power.plot.chisq(es=es,power=power,df=1,sig.level=0.05,type="ne")
+power.plot.chisq(es=es,power=power,df=1,sig.level=0.05,type="np")
+
+### multiple effect size and single power
+power.plot.chisq(es=seq(0.05,0.3,0.05),power=0.8,df=1,sig.level=0.05,type="ne")
+power.plot.chisq(es=seq(0.05,0.3,0.05),power=0.8,df=1,sig.level=0.05,type="np")
+
+### single effect size and single power
+power.plot.chisq(es=0.2,power=0.8,df=1,sig.level=0.05,type="ne")
+power.plot.chisq(es=0.2,power=0.8,df=1,sig.level=0.05,type="np")
+
+### single effect size and multiple power
+power.plot.chisq(es=0.2,power=seq(0.5,0.9,0.1),df=1,sig.level=0.05,type="ne")
+power.plot.chisq(es=0.2,power=seq(0.5,0.9,0.1),df=1,sig.level=0.05,type="np")
+}
+\seealso{
+  \code{\link{power.chisq}}
+}
+

@@ -1,0 +1,47 @@
+\name{ES.t.paired}
+\alias{ES.t.paired}
+\title{Calculating effect size (Cohen's d) of paired two-sample t test}
+\usage{
+  ES.t.paired(md = NULL, sd = NULL, n = NULL, t = NULL,
+    se = NULL, df = NULL,
+    alternative = c("two.sided", "one.sided"))
+}
+\arguments{
+  \item{md}{mean difference (e.g., mean(x-y))}
+
+  \item{sd}{standard deviation of mean differences (e.g.,
+  sd(x-y))}
+
+  \item{n}{number of paires}
+
+  \item{t}{t statistic}
+
+  \item{se}{standard error of mean differences}
+
+  \item{df}{degree of freedom}
+
+  \item{alternative}{The test is two sided or one sided}
+}
+\description{
+  Calculating effect size (Cohen's d) of paired two-sample
+  t test
+}
+\examples{
+## md, sd -> d
+ES.t.paired(md=-0.08062384,sd=1.401886)
+
+## md,se -> d
+ES.t.paired(md=-0.08062384,se=0.1982566,n=50)
+
+## t, df -> d
+ES.t.paired(t=-0.4067,df=49)
+
+## t, n -> d
+ES.t.paired(t=-0.4067,n=50)
+}
+\seealso{
+  \code{\link{ES.t.one}}
+
+  \code{\link{ES.t.two}}
+}
+

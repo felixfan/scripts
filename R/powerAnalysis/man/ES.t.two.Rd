@@ -1,0 +1,57 @@
+\name{ES.t.two}
+\alias{ES.t.two}
+\title{Calculating effect size (Cohen's d) of independent two-sample t test}
+\usage{
+  ES.t.two(m1 = NULL, m2 = NULL, sd1 = NULL, sd2 = NULL,
+    n1 = NULL, n2 = NULL, t = NULL, se1 = NULL, se2 = NULL,
+    df = NULL, alternative = c("two.sided", "one.sided"))
+}
+\arguments{
+  \item{m1}{mean of sample 1}
+
+  \item{m2}{mean of sample 2}
+
+  \item{sd1}{standard deviation of sample 1}
+
+  \item{sd2}{standard deviation of sample 2}
+
+  \item{n1}{number of observations in sample 1}
+
+  \item{n2}{number of observations in sample 2}
+
+  \item{t}{t statistic}
+
+  \item{se1}{standard error of sample 1}
+
+  \item{se2}{standard error of sample 2}
+
+  \item{df}{degree of freedom}
+
+  \item{alternative}{The test is two sided or one sided}
+}
+\description{
+  Calculating effect size (Cohen's d) of independent
+  two-sample t test
+}
+\examples{
+## mean, sd, n -> d
+ES.t.two(m1=13.5,m2=5.5,sd1=4.1833,sd2=3.02765,n1=14,n2=10)
+
+## mean se, n -> d
+ES.t.two(m1=13.5,m2=5.5,se1=1.118034,se2=0.9574271,n1=14,n2=10)
+
+## t and n -> d
+ES.t.two(n1=14,n2=10,t=5.4349)
+
+## t, df and n -> d
+ES.t.two(t = 5.4349, df = 21.982,n1=14,n2=10)
+
+## t and df -> d (assume n1=n2)
+ES.t.two(t = 5.4349, df = 21.982)
+}
+\seealso{
+  \code{\link{ES.t.one}}
+
+  \code{\link{ES.t.paired}}
+}
+

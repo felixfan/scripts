@@ -1,0 +1,47 @@
+\name{ES.t.one}
+\alias{ES.t.one}
+\title{Calculating effect size (Cohen's d) of one-sample t test}
+\usage{
+  ES.t.one(m = NULL, sd = NULL, n = NULL, t = NULL,
+    se = NULL, df = NULL, mu = NULL,
+    alternative = c("two.sided", "one.sided"))
+}
+\arguments{
+  \item{m}{mean of sample}
+
+  \item{sd}{standard deviation of sample}
+
+  \item{n}{number of observations}
+
+  \item{t}{t statistic}
+
+  \item{se}{standard error of sample 1}
+
+  \item{df}{degree of freedom}
+
+  \item{mu}{population mean}
+
+  \item{alternative}{The test is two sided or one sided}
+}
+\description{
+  Calculating effect size (Cohen's d) of one-sample t test
+}
+\examples{
+## mean, sd and mu -> d
+ES.t.one(m=-0.0938268,sd=0.9836668,mu=0)
+
+## mean, se, n and mu -> d
+ES.t.one(m=-0.0938268,se=0.1391115,n=50,mu=0)
+
+## t and df -> d (df=n-1)
+ES.t.one(t = -0.6745,df = 49)
+
+## t and n -> d ((df=n-1))
+ES.t.one(t = -0.6745,n = 50)
+}
+\seealso{
+  \code{\link{ES.t.two}}
+
+  \code{\link{ES.t.paired}}
+}
+

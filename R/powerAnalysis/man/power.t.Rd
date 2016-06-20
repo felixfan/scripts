@@ -1,0 +1,90 @@
+\name{power.t}
+\alias{power.t}
+\title{Power calculations for t-test}
+\usage{
+  power.t(es = NULL, n = NULL, power = NULL,
+    sig.level = NULL, ratio = 1,
+    type = c("two", "paired", "one", "unequal"),
+    alternative = c("two.sided", "left", "right"))
+}
+\arguments{
+  \item{es}{effect size.}
+
+  \item{n}{total number of observations/pairs}
+
+  \item{power}{power of study}
+
+  \item{sig.level}{significance level}
+
+  \item{ratio}{the ratio of sample size 1 to sample size 2.
+  Only will be used when 'type' is "unequal".}
+
+  \item{type}{type of t test, must be one of "one","two"
+  (default), "paired", or "unequal". "one" means one sample
+  t test, which test whether the population mean is equal
+  to a specified value. "two"/"unequal" means two sample
+  (equal size/unequal size) t test, which is used to
+  ascertain how likely an observed mean difference between
+  two groups would be to occur by chance alone. "paired"
+  means paired t-test (also called the correlated t-test
+  and the t-test for dependent means), which is used to
+  ascertain how likely the difference between two means
+  that contain the same (or matched) observations is to
+  occur by chance alone.}
+
+  \item{alternative}{One- or two-sided test, must be one of
+  "two.sided" (default), "left", "right"}
+}
+\description{
+  Power calculations for t-test
+}
+\examples{
+## one sample two sided test, calculate power
+power.t(es=0.2,n=60,sig.level=0.10,type="one",alternative="two.sided")
+
+## one sample one sided (left tail) test, calculate power
+power.t(es=0.2,n=60,sig.level=0.10,type="one",alternative="left")
+
+## one sample one sided (right tail) test, calculate power
+power.t(es=0.2,n=60,sig.level=0.10,type="one",alternative="right")
+
+## one sample two sided test, calculate sampe size
+power.t(es=0.2,power=0.8,sig.level=0.05,type="one",alternative="two.sided")
+
+## one sample two sided test, calculate effect size
+power.t(n=200,power=0.8,sig.level=0.05,type="one",alternative="two.sided")
+
+## one sample two sided test, calculate sig.level
+power.t(es=0.2,n=200,power=0.8,type="one",alternative="two.sided")
+
+## paired sample two sided test, calculate power
+power.t(es=0.559,n=40,sig.level=0.05,type="paired",alternative="two.sided")
+
+## paired sample two sided test, calculate sample size
+power.t(es=0.15,power=0.8,sig.level=0.05,type="paired",alternative="two.sided")
+
+## paired sample two sided test, calculate effect size
+power.t(n=200,power=0.8,sig.level=0.05,type="paired",alternative="two.sided")
+
+## two sample two sided test, calculate power
+power.t(es=0.15,n=300,sig.level=0.05,type="two",alternative="two.sided")
+
+## two sample two sided test, calculate sample size
+power.t(es=0.15,power=0.8,sig.level=0.05,type="two",alternative="two.sided")
+
+## two sample two sided test, calculate effect size
+power.t(n=300,power=0.8,sig.level=0.05,type="two",alternative="two.sided")
+
+## two sample (unequal size), calculate sample size
+power.t(es=0.15,power=0.8,sig.level=0.05,type="unequal",ratio=2,alternative="two.sided")
+
+power.t(es=0.1,n=3000,sig.level=0.05,type="unequal",ratio=2,alternative="two.sided")
+}
+\seealso{
+  \code{\link{ES.t.one}}
+
+  \code{\link{ES.t.two}}
+
+  \code{\link{ES.t.paired}}
+}
+

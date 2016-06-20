@@ -1,0 +1,39 @@
+\name{power.proportions}
+\alias{power.proportions}
+\title{Power calculations for proportion tests (two-sided)}
+\usage{
+  power.proportions(n = NULL, h = NULL, power = NULL,
+    sig.level = 0.05, type = c("two", "one", "unequal"),
+    ratio = 1)
+}
+\arguments{
+  \item{n}{Total number of observations}
+
+  \item{h}{Effect size, Cohen's h}
+
+  \item{power}{Power of test}
+
+  \item{sig.level}{Significance level}
+
+  \item{type}{Type of proportion tests, must be one of
+  "one","two" (default), or "unequal". "one" means one
+  sample proportion test. "two"/"unequal" means two sample
+  (equal size/unequal size) proportion test.}
+
+  \item{ratio}{The ratio of sample size 1 to sample size 2.
+  Only will be used when 'type' is "unequal".}
+}
+\description{
+  Power calculations for proportion tests (two-sided)
+}
+\examples{
+## one sample
+power.proportions(n=600,h=0.3,type="one")
+
+## two sample with same sample size
+power.proportions(h=0.2,n=600)
+
+## two sample with different sample size
+power.proportions(h=0.2,n=1200,type="unequal",ratio=2)
+}
+

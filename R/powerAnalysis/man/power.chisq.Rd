@@ -1,0 +1,43 @@
+\name{power.chisq}
+\alias{power.chisq}
+\title{Power calculations for chi-squared test}
+\usage{
+  power.chisq(es = NULL, df = NULL, n = NULL, power = NULL,
+    sig.level = NULL)
+}
+\arguments{
+  \item{es}{effect size. A numeric value or output of
+  ES.chisq.gof, ES.chisq.assoc}
+
+  \item{df}{degree of freedom}
+
+  \item{n}{total number of observations}
+
+  \item{power}{power of study}
+
+  \item{sig.level}{significance level}
+}
+\description{
+  Power calculations for chi-squared test
+}
+\examples{
+## calculate power
+power.chisq(es=0.16,df=1,n=530,sig.level=0.05)
+
+## calculate sig.level
+power.chisq(es=0.16,df=1,n=530,power=0.9576)
+
+## calculate sample size
+power.chisq(es=0.16,df=1,power=0.9576,sig.level=0.05)
+
+## calculate effect size
+power.chisq(df=1,n=530,power=0.9576,sig.level=0.05)
+}
+\seealso{
+  \code{\link{ES.chisq.gof}}
+
+  \code{\link{ES.chisq.assoc}}
+
+  \code{\link{power.plot.chisq}}
+}
+

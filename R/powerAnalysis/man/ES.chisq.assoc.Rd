@@ -1,0 +1,49 @@
+\name{ES.chisq.assoc}
+\alias{ES.chisq.assoc}
+\title{Compute effect size of chi-squared test of association}
+\usage{
+  ES.chisq.assoc(ct = NULL, chisq = NULL, p = NULL,
+    n = NULL, df = NULL, mindf = NULL)
+}
+\arguments{
+  \item{ct}{a m x n Contingency Table (matrix with m rows
+  and n columes)}
+
+  \item{chisq}{the value the chi-squared test statistic}
+
+  \item{p}{p value for the chi-squared test}
+
+  \item{df}{degree of freedom (e.g., df=(m-1)*(n-1))}
+
+  \item{n}{total number of observations (sample size)}
+
+  \item{mindf}{the degrees of freedom for the variable with
+  the smaller number of levels, if m > n, mindf=n-1,
+  otherwise, mindf=m-1}
+}
+\description{
+  Compute effect size of chi-squared test of association
+}
+\examples{
+counts <- matrix(c(225,125,85,95),nrow=2,byrow=TRUE)
+ES.chisq.assoc(ct=counts)
+
+case <- c(225,85,100)
+control <- c(125,95,125)
+counts <- cbind(case,control)
+ES.chisq.assoc(ct=counts)
+
+p1 <- c(225,85,100)
+p2 <- c(125,95,125)
+p3 <- c(175,90,113)
+counts <- cbind(p1,p2,p3)
+ES.chisq.assoc(ct=counts)
+
+ES.chisq.assoc(chisq=13.561,n=530,df=1,mindf=1)
+
+ES.chisq.assoc(p=0.000231,n=530,df=1,mindf=1)
+}
+\seealso{
+  \code{\link{ES.chisq.gof}}
+}
+

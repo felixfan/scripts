@@ -1,0 +1,37 @@
+\name{ES.chisq.gof}
+\alias{ES.chisq.gof}
+\title{Compute effect size of chi-squared test of goodness of fit}
+\usage{
+  ES.chisq.gof(p1 = NULL,
+    p0 = rep(1/length(p1), length(p1)))
+}
+\arguments{
+  \item{p1}{a vector of frequencies or probabilities
+  (alternative hypothesis). Frequencies will be rescaled to
+  probabilities automatically. An error is given if any
+  entry of p1 is negative.}
+
+  \item{p0}{a vector of frequencies or probabilities of the
+  same length of p1 (null hypothesis). Frequencies will be
+  rescaled to probabilities automatically. An error is
+  given if any entry of p0 is negative. Default value of p0
+  is a vector of 1/n with length of n. n is the length of
+  p1.}
+}
+\description{
+  Compute effect size of chi-squared test of goodness of
+  fit
+}
+\examples{
+ES.chisq.gof(p1=c(10,20,30,40))
+ES.chisq.gof(p1=c(0.1,0.2,0.3,0.4))
+
+ES.chisq.gof(p1=c(10,20,30,40),p0=c(0.2,0.3,0.3,0.2))
+ES.chisq.gof(p1=c(10,20,30,40),p0=c(20,30,30,20))
+ES.chisq.gof(p1=c(0.1,0.2,0.3,0.4),p0=c(0.2,0.3,0.3,0.2))
+ES.chisq.gof(p1=c(0.1,0.2,0.3,0.4),p0=c(20,30,30,20))
+}
+\seealso{
+  \code{\link{ES.chisq.assoc}}
+}
+

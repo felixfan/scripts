@@ -1,0 +1,24 @@
+\name{ES.proportions}
+\alias{ES.proportions}
+\title{Compute effect size for a difference in proportions}
+\usage{
+  ES.proportions(p1 = NULL, p2 = NULL,
+    alternative = c("two.sided", "one.sided"))
+}
+\arguments{
+  \item{p1}{Proportion of sample one}
+
+  \item{p2}{Proportion of sample two or a constant
+  proportion}
+
+  \item{alternative}{The test is two sided or one sided}
+}
+\description{
+  Compute effect size for a difference in proportions
+}
+\examples{
+ES.proportions(0.65,0.45)
+
+ES.proportions(0.25,0.05)
+}
+
