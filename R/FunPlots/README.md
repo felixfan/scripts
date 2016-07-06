@@ -152,5 +152,9 @@ thong(h = 9)
 
 
 
-[**reference**](http://stackoverflow.com/questions/8082429/plot-a-heart-in-r)
+[**reference**](http://stackoverflow.com/questions/8082429/plot-a-heart-in-r)        
+
+![heart-rose](figure/heart-rose.png)    
+
+
 
