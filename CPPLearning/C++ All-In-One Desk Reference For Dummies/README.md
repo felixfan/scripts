@@ -1,7 +1,5 @@
 C++ Examples
-===========
-
-[More about me](http://felixfan.github.io)     
+===========   
 
 Books:
 
