@@ -51,3 +51,4 @@ Temporary Items
 *.html
 *.py
 *.pyc
+.ipynb_checkpoints
