@@ -163,32 +163,160 @@ $$\binom{K}{L}P_{ε}^L(1-P_{ε})^{K-L}$$
 
 # 4. Random Forests
 
+- Random Forests are an ensemble learning method for classification and regression      
+- It combines multiple individual decision trees by means of bagging      
+- Overcomes the problem of overfitting decision trees     
+
+**Algorithm**   
+
+- Create many decision trees by bagging     
+- Inject randomness into decision trees    
+  -- Tree grows to maximum size and is left unpruned    
+  -- Each split is based on randomly selected subset of attributes    
+- Ensemble trees (i. e. the random forest) vote on categories by majority   
+
+**Advantages**   
+
+- Simple algorithm that learns non-linearity    
+- Good performance in practice      
+- Fast training algorithm    
+- Resistant to overfitting    
+
+**Limitations**   
+
+- High memory consumption during tree construction    
+- Little performance gain from large training data   
+
+## 4.1 Random Forests in R
+
+```{r comment='',warning=FALSE,message=FALSE}
+library(randomForest)
+rf <- randomForest(Class ~ ., data=training, ntree=100)
+```
+
+Options to control behavior:    
+
+- `ntree` controls the number of trees (default: 500)    
+- `mtry` gives number of variables to choose from at each node    
+- `na.action` specifies how to handle missing values     
+- `importance=TRUE` calculates variable importance metric    
+
+```{r comment='',warning=FALSE,message=FALSE}
+plot(rf)
+```
+
+- Dotted lines represent corresponding error of classes and solid black line represents overall error   
+
+```{r comment='',warning=FALSE,message=FALSE}
+rf$confusion
+```
+
+```{r comment='',warning=FALSE,message=FALSE}
+pred <- predict(rf, newdata=testing)
+table(pred=pred, true=testing$Class)
+```
+
+## 4.2 Variable Importance in R
+
+```{r comment='',warning=FALSE,message=FALSE}
+rf2 <- randomForest(Class ~ ., 
+                    data=GermanCredit, #with full dataset
+                    ntree=100,
+                    importance=TRUE)
+```
+
+```{r comment='',warning=FALSE,message=FALSE}
+varImpPlot(rf2, type=1, n.var=5)
+```
+
+- `type` choose the importance metric (= 1 is the mean decrease in accuracy if the variable would be randomly permuted)    
+- `n.var` denotes number of variables    
+
 # 5. Boosting
+
+- Combine multiple classifiers to improve classification accuracy    
+- Works together with many different types of classifiers    
+- None of the classifier needs extremely good, only better than chance    
+- Idea: train classifiers on a subset of the training data that is most informative given the current classifiers   
+- Yields sequential classifier selection    
+
+## 5.1 Boosting in R
+
+```{r comment='',warning=FALSE,message=FALSE}
+library(mboost)
+```
+
+### 5.1.1 Fit a generalized linear model via glmboost(...)   
+
+```{r comment='',warning=FALSE,message=FALSE}
+m.boost <- glmboost(Class ~ Amount + Duration + Personal.Female.Single,
+                    family=Binomial(), # needed for classification
+                    data=GermanCredit)
+```
+
+```{r comment='',warning=FALSE,message=FALSE}
+coef(m.boost)
+```
+
+```{r comment='',warning=FALSE,message=FALSE}
+plot(m.boost, ylim=range(coef(m.boost, which=c("Amount", "Duration"))))
+```
+
+```{r comment='',warning=FALSE,message=FALSE}
+cv.boost <- cvrisk(m.boost)
+mstop(cv.boost)               # optimal no. of iterations to prevent overfitting
+```
+
+```{r comment='',warning=FALSE,message=FALSE}
+plot(cv.boost, main="Cross-validated estimates of empirical risk")
+```
+
+### 5.1.2 fit generalized additive model via component-wise boosting
+
+```{r comment='',warning=FALSE,message=FALSE}
+m.boost <- gamboost(Class ~ Amount + Duration,
+                    family=Binomial(), # needed for classification
+                    data=GermanCredit)
+m.boost
+```
 
 # 6. AdaBoost
 
+- Instead of resampling, reweight misclassified training examples   
 
+**Benefits**   
+
+- Simple combination of multiple classifiers    
+- Easy implementation    
+- Different types of classifiers can be used     
+- Commonly in used across many domains   
+
+**Limitations**   
+
+- Sensitive to misclassified points in training data   
+
+## 6.1 AdaBoost in R
 
 ```{r comment='',warning=FALSE,message=FALSE}
-
+library(ada)
 ```
+
 ```{r comment='',warning=FALSE,message=FALSE}
-
+m.ada <- ada(Class ~ ., data=training, iter=50)
 ```
+
 ```{r comment='',warning=FALSE,message=FALSE}
-
+m.ada.test <- addtest(m.ada, test.x=testing, test.y=testing$Class)
 ```
+
 ```{r comment='',warning=FALSE,message=FALSE}
-
+m.ada.test
 ```
+
 ```{r comment='',warning=FALSE,message=FALSE}
-
+plot(m.ada.test, test=TRUE)
 ```
+
 ```{r comment='',warning=FALSE,message=FALSE}
-
+varplot(m.ada.test, max.var.show=5) # first 5 variables
 ```
-
-
-
-
-

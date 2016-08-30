@@ -225,20 +225,261 @@ $$\binom{K}{L}P_{ε}^L(1-P_{ε})^{K-L}$$
 
 # 4. Random Forests
 
+- Random Forests are an ensemble learning method for classification and regression      
+- It combines multiple individual decision trees by means of bagging      
+- Overcomes the problem of overfitting decision trees     
+
+**Algorithm**   
+
+- Create many decision trees by bagging     
+- Inject randomness into decision trees    
+  -- Tree grows to maximum size and is left unpruned    
+  -- Each split is based on randomly selected subset of attributes    
+- Ensemble trees (i. e. the random forest) vote on categories by majority   
+
+**Advantages**   
+
+- Simple algorithm that learns non-linearity    
+- Good performance in practice      
+- Fast training algorithm    
+- Resistant to overfitting    
+
+**Limitations**   
+
+- High memory consumption during tree construction    
+- Little performance gain from large training data   
+
+## 4.1 Random Forests in R
+
+
+```r
+library(randomForest)
+rf <- randomForest(Class ~ ., data=training, ntree=100)
+```
+
+Options to control behavior:    
+
+- `ntree` controls the number of trees (default: 500)    
+- `mtry` gives number of variables to choose from at each node    
+- `na.action` specifies how to handle missing values     
+- `importance=TRUE` calculates variable importance metric    
+
+
+```r
+plot(rf)
+```
+
+![](Ensemble_files/figure-html/unnamed-chunk-15-1.png)<!-- -->
+
+- Dotted lines represent corresponding error of classes and solid black line represents overall error   
+
+
+```r
+rf$confusion
+```
+
+```
+     Bad Good class.error
+Bad   87  151  0.63445378
+Good  53  523  0.09201389
+```
+
+
+```r
+pred <- predict(rf, newdata=testing)
+table(pred=pred, true=testing$Class)
+```
+
+```
+      true
+pred   Bad Good
+  Bad  260   12
+  Good  40  687
+```
+
+## 4.2 Variable Importance in R
+
+
+```r
+rf2 <- randomForest(Class ~ ., 
+                    data=GermanCredit, #with full dataset
+                    ntree=100,
+                    importance=TRUE)
+```
+
+
+```r
+varImpPlot(rf2, type=1, n.var=5)
+```
+
+![](Ensemble_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
+
+- `type` choose the importance metric (= 1 is the mean decrease in accuracy if the variable would be randomly permuted)    
+- `n.var` denotes number of variables    
+
 # 5. Boosting
+
+- Combine multiple classifiers to improve classification accuracy    
+- Works together with many different types of classifiers    
+- None of the classifier needs extremely good, only better than chance    
+- Idea: train classifiers on a subset of the training data that is most informative given the current classifiers   
+- Yields sequential classifier selection    
+
+## 5.1 Boosting in R
+
+
+```r
+library(mboost)
+```
+
+### 5.1.1 Fit a generalized linear model via glmboost(...)   
+
+
+```r
+m.boost <- glmboost(Class ~ Amount + Duration + Personal.Female.Single,
+                    family=Binomial(), # needed for classification
+                    data=GermanCredit)
+```
+
+
+```r
+coef(m.boost)
+```
+
+```
+  (Intercept)        Amount      Duration 
+ 4.104949e-01 -1.144369e-05 -1.703911e-02 
+attr(,"offset")
+[1] 0.4236489
+```
+
+
+```r
+plot(m.boost, ylim=range(coef(m.boost, which=c("Amount", "Duration"))))
+```
+
+![](Ensemble_files/figure-html/unnamed-chunk-23-1.png)<!-- -->
+
+
+```r
+cv.boost <- cvrisk(m.boost)
+mstop(cv.boost)               # optimal no. of iterations to prevent overfitting
+```
+
+```
+[1] 26
+```
+
+
+```r
+plot(cv.boost, main="Cross-validated estimates of empirical risk")
+```
+
+![](Ensemble_files/figure-html/unnamed-chunk-25-1.png)<!-- -->
+
+### 5.1.2 fit generalized additive model via component-wise boosting
+
+
+```r
+m.boost <- gamboost(Class ~ Amount + Duration,
+                    family=Binomial(), # needed for classification
+                    data=GermanCredit)
+m.boost
+```
+
+```
+
+	 Model-based Boosting
+
+Call:
+gamboost(formula = Class ~ Amount + Duration, data = GermanCredit,     family = Binomial())
+
+
+	 Negative Binomial Likelihood 
+
+Loss function: { 
+     f <- pmin(abs(f), 36) * sign(f) 
+     p <- exp(f)/(exp(f) + exp(-f)) 
+     y <- (y + 1)/2 
+     -y * log(p) - (1 - y) * log(1 - p) 
+ } 
+ 
+
+Number of boosting iterations: mstop = 100 
+Step size:  0.1 
+Offset:  0.4236489 
+Number of baselearners:  2 
+```
 
 # 6. AdaBoost
 
+- Instead of resampling, reweight misclassified training examples   
+
+**Benefits**   
+
+- Simple combination of multiple classifiers    
+- Easy implementation    
+- Different types of classifiers can be used     
+- Commonly in used across many domains   
+
+**Limitations**   
+
+- Sensitive to misclassified points in training data   
+
+## 6.1 AdaBoost in R
 
 
+```r
+library(ada)
+```
 
 
+```r
+m.ada <- ada(Class ~ ., data=training, iter=50)
+```
 
 
+```r
+m.ada.test <- addtest(m.ada, test.x=testing, test.y=testing$Class)
+```
 
 
+```r
+m.ada.test
+```
+
+```
+Call:
+ada(Class ~ ., data = training, iter = 50)
+
+Loss: exponential Method: discrete   Iteration: 50 
+
+Final Confusion Matrix for Data:
+          Final Prediction
+True value Bad Good
+      Bad  169   69
+      Good   9  567
+
+Train Error: 0.096 
+
+Out-Of-Bag Error:  0.123  iteration= 48 
+
+Additional Estimates of number of iterations:
+
+train.err1 train.kap1 test.errs2 test.kaps2 
+        49         49         49         49 
+```
 
 
+```r
+plot(m.ada.test, test=TRUE)
+```
+
+![](Ensemble_files/figure-html/unnamed-chunk-31-1.png)<!-- -->
 
 
+```r
+varplot(m.ada.test, max.var.show=5) # first 5 variables
+```
 
+![](Ensemble_files/figure-html/unnamed-chunk-32-1.png)<!-- -->
