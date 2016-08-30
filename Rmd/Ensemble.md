@@ -483,3 +483,6 @@ varplot(m.ada.test, max.var.show=5) # first 5 variables
 ```
 
 ![](Ensemble_files/figure-html/unnamed-chunk-32-1.png)<!-- -->
+
+
+Reference: http://www.is.uni-freiburg.de/ressourcen/business-analytics/10_ensemblelearning.pdf/
