@@ -1,0 +1,72 @@
+---
+title: "stepwise regression"
+output: 
+  html_document:
+    keep_md: true
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 1. Stepwise Regression Analysis
+
+this is the name given to the iterative construction of a multiple regression model. It works by automatic selecting statistically significant independent variables to include in the regression analysis. This is achieved either by either growing or pruning the variables included in the regression analysis.    
+
+This form of regression is used when we deal with multiple independent variables. In this technique, the selection of independent variables is done with the help of an automatic process, which involves no human intervention.    
+
+This feat is achieved by observing statistical values like R-square, t-stats and AIC metric to discern significant variables. Stepwise regression basically fits the regression model by adding/dropping co-variates one at a time based on a specified criterion. Some of the most commonly used Stepwise regression methods are listed below:    
+
+Standard stepwise regression does two things. It adds and removes predictors as needed for each step.  
+
+- Forward selection starts with most significant predictor in the model and adds variable for each step.   
+- Backward elimination starts with all predictors in the model and removes the least significant variable for each step.  
+
+The aim of this modeling technique is to maximize the prediction power with minimum number of predictor variables. It is one of the method to handle higher dimensionality of data set.   
+
+# 2. Stepwise Regression Analysis in R
+
+Selecting a subset of predictor variables from a larger set (e.g., stepwise selection) is a controversial topic. You can perform stepwise selection (forward, backward, both) using the stepAIC( ) function from the MASS package. stepAIC( ) performs stepwise model selection by exact AIC.   
+
+```{r comment='', warning=FALSE, message=FALSE, eval=FALSE}
+library(MASS)
+fit <- lm(y~x1+x2+x3,data=mydata)
+step <- stepAIC(fit, direction="both")
+step$anova # display results
+```
+
+Alternatively, you can perform all-subsets regression using the leaps( ) function from the leaps package. In the following code `nbest` indicates the number of subsets of each size to report. Here, the ten best models will be reported for each subset size (1 predictor, 2 predictors, etc.).
+
+```{r comment='', warning=FALSE, message=FALSE, eval=FALSE}
+# All Subsets Regression
+library(leaps)
+attach(mydata)
+leaps<-regsubsets(y~x1+x2+x3+x4,data=mydata,nbest=10)
+# view results 
+summary(leaps)
+# plot a table of models showing variables in each model.
+# models are ordered by the selection statistic.
+plot(leaps,scale="r2")
+
+# plot statistic by subset size 
+library(car)
+subsets(leaps, statistic="rsq")
+```
+
+# 3. Relative Importance
+
+The relaimpo package provides measures of relative importance for each of the predictors in the model. See help(calc.relimp) for details on the four measures of relative importance provided.   
+
+```{r comment='', warning=FALSE, message=FALSE, eval=FALSE}
+# Calculate Relative Importance for Each Predictor
+library(relaimpo)
+calc.relimp(fit,type=c("lmg","last","first","pratt"),rela=TRUE)
+
+# Bootstrap Measures of Relative Importance (1000 samples) 
+boot <- boot.relimp(fit, b = 1000, type = c("lmg", "last", "first", "pratt"), rank = TRUE, diff = TRUE, rela = TRUE)
+booteval.relimp(boot) # print result
+plot(booteval.relimp(boot,sort=TRUE)) # plot result
+```
+
+
