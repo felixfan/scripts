@@ -16,6 +16,19 @@ do
 done
 ```
 
+```bash
+array=( one two three )
+for i in $(seq 0 2)
+do
+	for j in $(seq 0 2)
+	do
+		if [ $j -gt $i ]; then
+			echo ${array[$i]} ${array[$j]}
+		fi
+	done
+done
+```
+
 # 3. Sum/average column 1 of a file
 
 ```bash
@@ -36,7 +49,7 @@ awk '!arr[$2]++' file.txt
 awk '!($2 in arr){print}{arr[$2]++}' file.txt
 ```
 
-# 6. Print each line where the 5th field is equal/not equal to abc123
+# 6. Print each line where the 5th field is equal/not equal to "abc123"
 
 ```bash
 awk '$5 == "abc123"' file.txt
