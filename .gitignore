@@ -53,3 +53,5 @@ Temporary Items
 *.csv
 *.py
 *.zip
+*.Rhistory
+*.pkl
