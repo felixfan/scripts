@@ -53,5 +53,7 @@ python/ipynb/*.html
 python/ipynb/*.csv
 python/ipynb/*.py
 python/ipynb/*.zip
-python/ipynb/*.Rhistory
 python/ipynb/*.pkl
+
+*.Rhistory
+Rmd/*.html
