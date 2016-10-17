@@ -44,14 +44,14 @@ Temporary Items
 .apdisk
 
 ############################
-*.pdf
-*.txt
-*.gz
-*.mp3
-*.sh
-*.html
-*.csv
-*.py
-*.zip
-*.Rhistory
-*.pkl
+python/ipynb/*.pdf
+python/ipynb/*.txt
+python/ipynb/*.gz
+python/ipynb/*.mp3
+python/ipynb/*.sh
+python/ipynb/*.html
+python/ipynb/*.csv
+python/ipynb/*.py
+python/ipynb/*.zip
+python/ipynb/*.Rhistory
+python/ipynb/*.pkl
