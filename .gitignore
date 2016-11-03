@@ -57,3 +57,4 @@ python/ipynb/*.pkl
 
 *.Rhistory
 Rmd/*.html
+.ipynb_checkpoints
