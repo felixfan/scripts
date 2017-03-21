@@ -1,0 +1,115 @@
+---
+title: "data-science-crash-course"
+output: 
+  html_document:
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# ggplot2
+
+## Bar Chart Code
+
+```{r comment='',message=FALSE,warning=FALSE}
+library(ggplot2)
+ggplot(data = diamonds, aes(x = cut)) + geom_bar()
+```
+
+## Scatter Plot Code
+
+```{r comment='',message=FALSE,warning=FALSE}
+ggplot(data = diamonds, aes(x = carat, y = price)) + geom_point()
+```
+
+## Line Chart Code
+
+```{r comment='',message=FALSE,warning=FALSE}
+df.dummy_data <- data.frame(
+  dummy_metric = cumsum(1:20),
+  date = seq.Date(as.Date("1980-01-01"), by="1 year", length.out=20)
+)
+
+ggplot(data = df.dummy_data, aes(x = date, y = dummy_metric)) + geom_line()
+```
+
+# dplyr
+
+## filter
+
+filter() performs row selection from your data.
+
+```{r comment='',message=FALSE,warning=FALSE}
+library(dplyr)
+df.diamonds_ideal <- filter(diamonds, cut=="Ideal")
+head(df.diamonds_ideal)
+```
+
+## select()
+
+select() allows you to select specific columns from your data.
+
+```{r comment='',message=FALSE,warning=FALSE}
+df.diamonds_ideal <- select(df.diamonds_ideal, carat, cut, color, price, clarity)
+head(df.diamonds_ideal)
+```
+
+## mutate()
+
+mutate() allows you to add variables to your dataset.
+
+```{r comment='',message=FALSE,warning=FALSE}
+df.diamonds_ideal <- mutate(df.diamonds_ideal, price_per_carat = price/carat)
+head(df.diamonds_ideal)
+```
+
+## arrange()
+
+arrange() sorts your data.
+
+```{r comment='',message=FALSE,warning=FALSE}
+# create simple data frame containing disordered numeric variable
+df.disordered_data <- data.frame(num_var = c(2,3,5,1,4))
+head(df.disordered_data)
+```
+
+```{r comment='',message=FALSE,warning=FALSE}
+# now we'll order them with arrange()
+arrange(df.disordered_data, num_var)
+```
+
+```{r comment='',message=FALSE,warning=FALSE}
+# we can also put them in descending order
+arrange(df.disordered_data, desc(num_var))
+```
+
+## summarize()
+
+summarize() allows you to compute summary statistics.
+
+```{r comment='',message=FALSE,warning=FALSE}
+summarize(df.diamonds_ideal, avg_price = mean(price, na.rm = TRUE))
+```
+
+# Machine learning
+
+```{r comment='',message=FALSE,warning=FALSE}
+ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point()
+```
+
+```{r comment='',message=FALSE,warning=FALSE}
+library(caret)
+model.mtcars_lm <- train(mpg ~ wt, data = mtcars, method = "lm")
+```
+
+```{r comment='',message=FALSE,warning=FALSE}
+coef.icept <- coef(model.mtcars_lm$finalModel)[1]
+coef.slope <- coef(model.mtcars_lm$finalModel)[2]
+ggplot(data = mtcars, aes(x = wt, y = mpg)) + geom_point() + 
+    geom_abline(slope = coef.slope, intercept = coef.icept, color = "red")
+```
+
+
+
