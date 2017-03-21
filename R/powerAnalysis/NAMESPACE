@@ -1,3 +1,6 @@
+importFrom("grDevices", "rainbow")
+importFrom("graphics", "abline", "axis", "legend", "lines", "points")
+importFrom("stats", "chisq.test", "pchisq", "qchisq", "uniroot")
 export(ES.anova.oneway)
 export(ES.chisq.assoc)
 export(ES.chisq.gof)

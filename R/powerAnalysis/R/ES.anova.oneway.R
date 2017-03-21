@@ -1,4 +1,4 @@
-#' Calculating effect size (Cohen's f) of one-way anova for means with equal observations in each group 
+#' Calculating effect size (Cohen's f) of one-way anova for means with equal observations in each group
 #'
 #' @param data a matrix or data frame
 #' @param sst  total sum of squares
@@ -8,7 +8,7 @@
 #' set.seed(9);x=rnorm(50);y=rnorm(50)
 #' z=rnorm(50);d=data.frame(x,y,z)
 #' ES.anova.oneway(data=d)
-#' 
+#'
 #' ES.anova.oneway(sst=50,ssb=1)
 ES.anova.oneway <- function(data=NULL,sst=NULL,ssb=NULL){
   f=NULL
@@ -16,9 +16,9 @@ ES.anova.oneway <- function(data=NULL,sst=NULL,ssb=NULL){
     n=nrow(data)
     mc=colMeans(data)
     m=mean(mc)
-    
+
     sst=sum((data-m)^2)
-    ssb=sum(50*(mc-m)^2)
+    ssb=sum(n*(mc-m)^2)
     f=sqrt(ssb/(sst-ssb))
   }else if(!is.null(sst) && !is.null(ssb) && all(sst>0,ssb>0)){
     f=sqrt(ssb/(sst-ssb))

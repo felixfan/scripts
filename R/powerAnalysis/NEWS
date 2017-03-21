@@ -1,6 +1,12 @@
+powerAnalysis 0.2.1
+===========
+Released 2017-Feb-02
+
+fix bug in ES.anova.oneway
+
 powerAnalysis 0.2
 ===========
-Released 2013-Oct-02
+Released 2013-Oct-03
 
 Basic functions for power analysis and effect size calculation (t test).
 Basic functions for power analysis and effect size calculation (oneway anova test).
@@ -10,6 +16,6 @@ powerAnalysis 0.1
 ===========
 Released 2013-Sept-01
 
-First official release of the powerAnalysis R package. 
+First official release of the powerAnalysis R package.
 
 Basic functions for power analysis and effect size calculation (chi square test).
