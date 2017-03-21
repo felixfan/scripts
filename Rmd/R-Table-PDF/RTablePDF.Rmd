@@ -1,8 +1,6 @@
 ---
-title: "R Notebook"
-output:
-  pdf_document: default
-  html_notebook: default
+title: "R Table PDF"
+output: pdf_document
 ---
 
 ```{r comment='', message=FALSE, warning=FALSE}
