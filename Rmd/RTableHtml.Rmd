@@ -1,0 +1,94 @@
+---
+title: "R Notebook"
+output:
+  html_document: default
+  html_notebook: default
+  pdf_document: default
+---
+
+```{r comment='', message=FALSE, warning=FALSE}
+library("stargazer")
+library("dplyr")
+library("nycflights13")
+library("AER") # Applied Econometrics with R
+```
+
+```{r comment='', message=FALSE, warning=FALSE}
+daily <- flights %>%
+  filter(origin == "EWR") %>%
+  group_by(year, month, day) %>%
+  summarise(delay = mean(dep_delay, na.rm = TRUE))
+
+daily_weather <- weather %>%
+  filter(origin == "EWR") %>%
+  group_by(year, month, day) %>%
+  summarise(temp   = mean(temp, na.rm = TRUE),
+            wind   = mean(wind_speed, na.rm = TRUE),
+            precip = sum(precip, na.rm = TRUE))
+
+# Merge flights with weather data frames
+both <- inner_join(daily, daily_weather) %>% 
+  data.frame()  # Temporary fix
+
+# Create an indicator for quarter
+both$quarter <- cut(both$month, breaks = c(0, 3, 6, 9, 12), 
+                                labels = c("1", "2", "3", "4"))
+
+# Create a vector of class logical
+both$hot <- as.logical(both$temp > 85)
+
+head(both)
+```
+
+# The default summary statistics table
+
+```{r comment='', message=FALSE, warning=FALSE, results='asis'}
+stargazer(both, type = "html")
+```
+
+When supplied a data frame, by default stargazer creates a table with summary statistics. If the **summary** option is set to FALSE then stargazer will instead print the contents of the data frame. 
+
+```{r comment='', message=FALSE, warning=FALSE,results='asis'}
+# Use only a few rows
+both2 <- both %>% slice(1:6)
+stargazer(both2, type = "html", summary = FALSE, rownames = FALSE)
+```
+
+# Change which statistics are displayed
+
+In order to customize which summary statistics are displayed, change any of the the following (logical) parameters, `nobs`, `mean.sd`, `min.max`, `median`, and `iqr`.  
+
+```{r comment='', message=FALSE, warning=FALSE, results='asis'}
+stargazer(both, type = "html", nobs = FALSE, mean.sd = TRUE, median = TRUE, iqr = TRUE)
+```
+
+# Change which statistics are displayed (a second way)
+
+```{r comment='', message=FALSE, warning=FALSE, results='asis'}
+stargazer(both, type = "html", summary.stat = c("n", "p75", "sd"))
+```
+
+# Remove logical variables in the summary statistics
+
+```{r comment='', message=FALSE, warning=FALSE, results='asis'}
+stargazer(both, type = "html", summary.logical = FALSE)
+```
+
+# Flip the table axes
+
+```{r comment='', message=FALSE, warning=FALSE, results='asis'}
+stargazer(both, type = "html", flip = TRUE)
+```
+
+# Control the number of decimal places
+
+```{r comment='', message=FALSE, warning=FALSE, results='asis'}
+stargazer(both, type = "html", flip=TRUE, digits = 1)
+```
+
+# Drop leading zeros from decimals
+
+```{r comment='', message=FALSE, warning=FALSE, results='asis'}
+stargazer(both, type = "html", flip=TRUE, digits = 1, initial.zero = FALSE)
+```
+
