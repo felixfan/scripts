@@ -1,9 +1,8 @@
 ---
-title: "R Notebook"
+title: "R Table HTML"
 output:
-  html_document: default
-  html_notebook: default
-  pdf_document: default
+  html_document:
+    keep_md: true
 ---
 
 ```{r comment='', message=FALSE, warning=FALSE}
