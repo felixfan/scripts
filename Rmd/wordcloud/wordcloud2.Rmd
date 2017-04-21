@@ -1,0 +1,50 @@
+---
+title: "wordcloud2"
+output: 
+  html_document:
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r comment='',warning=FALSE,message=FALSE}
+library(wordcloud2) 
+head(demoFreq)
+```
+
+```{r comment='',warning=FALSE,message=FALSE}
+wordcloud2(demoFreq, size=1.6)
+```
+
+```{r comment='',warning=FALSE,message=FALSE}
+wordcloud2(demoFreq, size=1.6, color='random-dark')
+```
+
+```{r comment='',warning=FALSE,message=FALSE}
+wordcloud2(demoFreq, size=1.6, color=rep_len(c("green","blue"), nrow(demoFreq)))
+```
+
+
+```{r comment='',warning=FALSE,message=FALSE}
+wordcloud2(demoFreq, size=1.6, color='random-light', backgroundColor="black")
+```
+
+```{r comment='',warning=FALSE,message=FALSE}
+wordcloud2(demoFreq, size = 0.7, shape = 'star')
+```
+
+
+```{r comment='',warning=FALSE,message=FALSE}
+wordcloud2(demoFreq, size = 2.3, minRotation = -pi/6, maxRotation = -pi/6, rotateRatio = 1)
+```
+
+
+```{r comment='',warning=FALSE,message=FALSE}
+wordcloud2(demoFreqC, size = 2, fontFamily = "微软雅黑", color = "random-light", backgroundColor = "grey")
+```
+
+
+
+
