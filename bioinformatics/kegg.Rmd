@@ -1,0 +1,39 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r, eval=FALSE}
+source("https://bioconductor.org/biocLite.R")
+biocLite("org.Hs.eg.db")
+biocLite("clusterProfiler")
+```
+
+```{r,message=FALSE,warning=FALSE}
+library(org.Hs.eg.db)
+library(clusterProfiler)
+
+hsa_kegg = download_KEGG('hsa')
+entrezids <- unique(hsa_kegg$KEGGPATHID2EXTID[,2])
+ids <- bitr(entrezids, fromType="ENTREZID", toType=c("SYMBOL","ENSEMBL"), OrgDb="org.Hs.eg.db")
+
+write.csv(ids, "ENTREZID_SYMBOL_ENSEMB.csv")
+write.csv(hsa_kegg$KEGGPATHID2NAME, "kegg_id_name.csv")
+write.csv(hsa_kegg$KEGGPATHID2EXTID, "kegg_id_entrezid.csv")
+```
+
+```{python}
+import pandas as pd
+
+k_name = pd.read_csv("kegg_id_name.csv")
+k_name = k_name.iloc[:,1:3]
+k_name.rename(columns={'from':"kegg_id", 'to':"path_name"}, inplace=True)
+
+k_eid = pd.read_csv("kegg_id_entrezid.csv")
+k_eid = k_eid.iloc[:,1:3]
+k_eid.rename(columns={'from':"kegg_id", 'to':"entrezid"}, inplace=True)
+
+ids = pd.read_csv("ENTREZID_SYMBOL_ENSEMB.csv")
+
+```
+
